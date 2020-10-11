@@ -1,0 +1,44 @@
+<html>
+ <head>
+  <title>Simple Web Page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script type="text/javascript">
+    let params = new URLSearchParams(location.search);
+    window.onload = function() {
+      const name = params.get("preferredname");
+      document.getElementById("thankname").innerText = name;
+      document.getElementById("foodploy").innerText = params.get("food");
+      
+      const secret = params.get("secret");
+      if (secret == "magic" || secret == "abracadabra") {
+        const secretButton = document.createElement("button");
+        secretButton.setAttribute("id", "secretButton");
+        secretButton.textContent = "Take me to the secrets.";
+
+        const secretURL = `secret.html?preferredname=${name}&secret=${secret}`;
+        secretButton.onclick = function() {
+          const duration = 500;
+          setTimeout(function() { location.href=secretURL; }, duration);
+        };
+
+        const secretArea = document.getElementById("secrets");
+        secretArea.appendChild(secretButton);
+      }
+    }
+  </script>
+ </head>
+ <body>
+   <p>
+     Thank you, <span id="thankname"></span>, for supporting Simple Web Page Industries.
+     We appreciate your business.
+     We also really like <span id="foodploy"></span>, so we know we'll get along.
+     Please look out for future opportunities.
+   </p>
+   <div id="secrets">
+   </div>
+   
+   <div id="footer">
+     <a href="http://validator.w3.org/check?uri=referer"><abbr title="Hypertext Markup Language">HTML</abbr></a>
+   </div>
+ </body>
+</html>
